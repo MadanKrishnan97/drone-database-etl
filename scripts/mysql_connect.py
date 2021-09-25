@@ -7,20 +7,19 @@ mydb = mysql.connector.connect(
   database="bcitdrone"
 )
 
-mycursor = mydb.cursor()
+def fetch_uris(min_lat, max_lat, min_lon, max_lon):
 
-min_lat = 75
-max_lat = 80
-min_lon = 40
-max_lon = 43
+  mycursor = mydb.cursor()
 
-fetch = f"SELECT * FROM gpstest " \
-        f"WHERE (latitude BETWEEN {min_lat} AND {max_lat}) AND " \
-        f"(longitude BETWEEN {min_lon} AND {max_lon})"
 
-mycursor.execute(fetch)
+  fetch = f"SELECT * FROM gpstest " \
+          f"WHERE (latitude BETWEEN {min_lat} AND {max_lat}) AND " \
+          f"(longitude BETWEEN {min_lon} AND {max_lon})"
 
-myresult = mycursor.fetchall()
+  mycursor.execute(fetch)
 
-for x in myresult:
-  print(x)
+  myresult = mycursor.fetchall()
+
+  s3Uris = [x[3] for x in myresult]
+
+  return s3Uris
