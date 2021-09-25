@@ -49,10 +49,11 @@ def extract_metadata(path_to_img: str) -> dict:
         if isinstance(img_metadata[t], str):
             img_metadata[t] = img_metadata[t].replace('\x00', '')
 
-
     return img_metadata
 
-### Ruizs Addition
+### Start of Ruizs Addition
+### Requires: !pip install exif
+### !pip install defusedxml 
 
 # Extract more metadata parameters (might only need a few of the ones that's extracted) 
 def extract_more(filepath):
@@ -63,7 +64,6 @@ def extract_more(filepath):
   return all_values
 
 # Returns more metadata on geolocation in dict format
-
 def extract_geolocation(file_path):
   gpsinfo = {}
   image = Image.open(file_path)
@@ -130,10 +130,10 @@ def metadata_dict_to_json(clean_metadata_dict):
 
 if __name__ == "__main__":
 
-    example_img = 'C:/Users/owner/Documents/Data Science/Datasets/100_0006_0001 (2).JPG'
+    example_img_ruiz = 'C:/Users/owner/Documents/Data Science/Datasets/100_0006_0001 (2).JPG'
 
-    # example_img = 'C:/Users/G-Unit/Desktop/Arisa/VDJ2021/' \
-    #               'drone-database-etl-copy/data/Part1/Images/100_0006_0001 (2).JPG'
+    example_img = 'C:/Users/G-Unit/Desktop/Arisa/VDJ2021/' \
+                  'drone-database-etl-copy/data/Part1/Images/100_0006_0001 (2).JPG'
 
     print(os.path.getsize(example_img))
     metadata_dict = extract_metadata(example_img)
@@ -145,12 +145,13 @@ if __name__ == "__main__":
 
     print(metadata_dict_to_json(clean_metadata(metadata_dict)))
 
-# Ruiz's additional functions
+### Start of testing space for Ruiz's additional functions
     print('======')
 
-    # # more_geo = extract_geolocation(example_img)
-    # print(more_geo)
+    more_geo = extract_geolocation(example_img_ruiz)
+    print(more_geo)
 
-    # print('======')
-    more_data = extract_more(example_img)
+    print('======')
+    more_data = extract_more(example_img_ruiz)
 
+### End of Ruiz's test space
