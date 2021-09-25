@@ -10,7 +10,6 @@ from PIL import Image, JpegImagePlugin
 from PIL.ExifTags import TAGS
 import os
 import json
-from file_crawler import get_root_structure, get_file_locations
 
 
 def extract_metadata(path_to_img: str) -> dict:
