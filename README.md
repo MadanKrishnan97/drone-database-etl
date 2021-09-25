@@ -19,7 +19,7 @@ others to query images by date, tag and location.
 
 Team lead: Madana Krishnan V K
 
-Mentors: Luciano Andrade, Todd Brett
+Mentors: Luciano Andrade, Dr. Todd C. Brett
 
 Team Members: Xinyue Chen, Annika Wevers, Enwongo Ekanem, Ruiz Rivera, Arisa Yoshikawa
 
