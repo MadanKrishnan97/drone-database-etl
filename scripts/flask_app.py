@@ -9,7 +9,7 @@ def fetch_image(from_long, to_long, from_lat, to_lat):
     # fetch_from_db(from_long, to_long, from_lat, to_lat)
     s3Uris = fetch_uris(from_lat, to_lat, from_long, to_long)
     s3URLs = uri_to_url(s3Uris)
-    return {"urls": s3Uris}
+    return {"urls": s3URLs}
 
 
 if __name__ == '__main__':
