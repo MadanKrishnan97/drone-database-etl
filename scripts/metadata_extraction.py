@@ -10,7 +10,6 @@ from PIL import Image, JpegImagePlugin
 from PIL.ExifTags import TAGS
 import os
 import json
-from file_crawler import get_root_structure, get_file_locations
 
 
 def extract_metadata(path_to_img: str) -> dict:
@@ -42,7 +41,7 @@ def extract_metadata(path_to_img: str) -> dict:
     image_jpeg = JpegImagePlugin.JpegImageFile(path_to_img)
     image_jpeg_data = image_jpeg.getxmp()
 
-    for tag_, metadata_ in image_jpeg_data['xmpmeta']['RDF']['Description'].items():
+    for tag_, metadata_ in image_jpeg_data['Description'].items():
         img_metadata[f'xmp_{tag_}'] = metadata_
 
     for t in img_metadata.keys():
@@ -113,15 +112,4 @@ if __name__ == "__main__":
 
     print(metadata_dict_to_json(clean_metadata(metadata_dict)))
 
-    # Get file_paths
-    root = input('File Location:')
-    root_structure = get_root_structure(root)
-    img_files, other_files = get_file_locations(root_structure)
-
-    # Get metadata_json of all images
-    imgs_metadata = [clean_metadata(extract_metadata(img_file)) for img_file in img_files]
-    imgs_locations = [x['imglocation'] for x in imgs_metadata]
-    imgs_metadata_json = [metadata_dict_to_json(m) for m in imgs_metadata]
-
-    print(imgs_metadata_json)
-
+tst = "test"
