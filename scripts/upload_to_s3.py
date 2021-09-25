@@ -8,6 +8,38 @@ import boto3
 from file_crawler import get_file_locations, get_root_structure
 from metadata_extraction import extract_metadata, clean_metadata
 
+
+def download_from_uris(listofuris):
+    s3 = boto3.client('s3')
+
+    filenames = []
+    objectnames = []
+
+    for uri in listofuris:
+        split_uri = uri.split('/')
+        filenames.append(split_uri[-1])
+        objectnames.append('/'.join(split_uri[-4:]))
+        bucketname = split_uri[2]
+
+    for i in range(len(listofuris)):
+        s3.download_file(bucketname, objectnames[i], filenames[i])
+
+def uri_to_url(uri_lists):
+
+    for uri in uri_lists:
+        split_uri = uri.split('/')
+        objectname = '/'.join(split_uri[-4:])
+        bucketname = split_uri[2]
+        url = f'https://{bucketname}.s3.us-east-2.amazonaws.com/{objectname}'
+
+
+
+uris = ['s3://vdjhackathon/dataset/Part1/Images/100_0006_0001 (2).JPG',
+        's3://vdjhackathon/dataset/Part1/Images/100_0006_0001 (2).JPG']
+
+download_from_uris(uris)
+
+
 if __name__ == '__main__':
 
     # Get file_paths
