@@ -113,3 +113,15 @@ if __name__ == "__main__":
     print(metadata_dict_to_json(clean_metadata(metadata_dict)))
 
 tst = "test"
+
+
+#creating a dictionary for the non-image files
+filepath= 'p2.ply'
+#your file path
+import pandas as pd
+def creation_date(file_path):
+    creat_time=os.path.getctime(file_path)
+    creat_time=pd.to_datetime(creat_time)
+    return creat_time
+meta_dict=dict({'file_path':filepath[:filepath.rfind('/')],'file_name':filepath[filepath.rfind('/')+1:],'file_type':filepath[filepath.rfind('.')+1:],'creat_date':creation_date(filepath)})
+
