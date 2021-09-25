@@ -1,19 +1,35 @@
 # Vancouver Datajam 2021
-### Health in our communities: recovering from the COVID19 pandemic
+### Health in our communities: Recovering from the COVID19 pandemic
 ### Project dimension:
-Social recovery: research and education
+Social recovery: Research and education
 
-## Project - Drone Image Database Project
+## Project - Drone Imaging Database Project
 
 ### Acknowledgement
 Project brought forward by partner organization:
-British Columbia Institute of Technology, Remotely Piloted Aircraft Systems team members Dr. Eric Saczuck and Sean 
+British Columbia Institute of Technology (BCIT), Remotely Piloted Aircraft Systems team members Dr. Eric Saczuck and Sean 
 Galaway
+
+Eric and Sean have utilized Drones and Remotely Piloted Aircraft Systems to capture aerial images of various locations. They have kindly shared a subset of the original dataset with us for the DataJam and does not contain sensitive information. However, images may not be used for a purpose other than building the database. Images are not to be studied nor distributed outside of the Vancouver Datajam. If you are interested in the drone image data set or want to learn more about their project, please get in contact with their team at [BCIT's RPAS hub website](https://www.bcit.ca/learning-teaching-centre/remotely-piloted-aircraft-systems/). 
 
 ### Description 
 The goal of this project is to develop a data ETL pipeline using Python on AWS to organize images taken by a drone. 
 Participants will receive a set of images, and tag information, and the goal is to develop a database that allows
-others to query images by date, tag and location.
+others to query images by date, tag and location. The team will focus on building an MVP (Minimum Viable Product -  a product with just enough features to be usable) in the hackathon.
+
+Using cloud is a nice way to ensure that the MVP built during the hackathon can be developed further as required and allows easy scalability (store TBs worth of images) that is important to the data owners.
+
+This project would be done using AWS cloud services. Python will be used for scripting purposes as required. The data will be stored using S3 and the metadata will be stored using DynamoDB. S3 is an industry standard way of storing data on AWS, and DynamoDB is a NoSQL database on AWS. Boto3 is the Python library that we will use to interact with the AWS services using Python.
+
+
+### Developed Skills 
+This project provided participants an opportunity to develop skills in the following areas:
+
+- Backend development 
+- Database and system design
+- Data engineering and ETL pipeline development
+- AWS services usage (S3, DynamoDB) 
+
 
 ## Project team members
 
