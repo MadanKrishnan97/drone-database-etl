@@ -2,6 +2,8 @@ from flask import Flask
 
 app = Flask(__name__)
 
+lat =
+url_str = f"/images/lat/{lat}/lon/{lon}"
 
 @app.route('/hello', methods=['GET', 'POST'])
 def welcome():
