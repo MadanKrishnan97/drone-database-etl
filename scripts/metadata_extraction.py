@@ -10,6 +10,7 @@ from PIL import Image, JpegImagePlugin
 from PIL.ExifTags import TAGS, GPSTAGS
 import os
 import json
+import exif #Needs pip install exif
 
 
 def extract_metadata(path_to_img: str) -> dict:
@@ -58,10 +59,10 @@ def extract_metadata(path_to_img: str) -> dict:
 # Extract more metadata parameters (might only need a few of the ones that's extracted) 
 def extract_more(filepath):
   with open(filepath, 'rb') as image_file:
-    image_file = Image(image_file)
+    image_file = exif.Image(image_file)
 
-  all_values = image_file.get_all()
-  return all_values
+  needed_params = image_file.get_all()
+  return needed_params
 
 # Returns more metadata on geolocation in dict format
 def extract_geolocation(file_path):
@@ -104,9 +105,6 @@ def clean_metadata(metadata_dictionary):
                   'make', 'model',
                   'latitude', 'longitude']
 
-    # Datetime unclear about 'creation'
-    # Missing colorprofile, focallength, alpha, redeye, metering, fnumber,
-    # exposure, exposuretime
 
     for i in range(len(data_to_keep)):
         new_key = new_labels[i]
@@ -138,6 +136,18 @@ if __name__ == "__main__":
     print(os.path.getsize(example_img))
     metadata_dict = extract_metadata(example_img)
 
+# Missing colorprofile, focallength, alpha, redeye, metering, fnumber,
+# exposure, exposuretime
+# --RR PATCH-- Added function that outputs exposure, exposuretime, colorprofile/color_space?, focallength, 
+# metering/metering_mode, fnumber,
+
+    extracted_data = extract_more(example_img_ruiz)
+    res = dict((k, extracted_data[k]) for k in ['exposure_time', 'f_number', 'exposure_program', 'focal_length', 'focal_length_in_35mm_film', 'metering_mode', 'color_space']
+                                        if k in extracted_data)
+
+    metadata_dict = {**metadata_dict, **res}
+# # --End of RR PATCH--
+
     for k, v in metadata_dict.items():
         print(f'{k}:{v}')
 
@@ -145,13 +155,14 @@ if __name__ == "__main__":
 
     print(metadata_dict_to_json(clean_metadata(metadata_dict)))
 
-### Start of testing space for Ruiz's additional functions
-    print('======')
+# ### Start of testing space for Ruiz's additional functions
 
-    more_geo = extract_geolocation(example_img_ruiz)
-    print(more_geo)
 
-    print('======')
-    more_data = extract_more(example_img_ruiz)
+    
+#     print('======')
 
-### End of Ruiz's test space
+#     more_geo = extract_geolocation(example_img_ruiz)
+#     print(more_geo)
+
+
+# ### End of Ruiz's test space
