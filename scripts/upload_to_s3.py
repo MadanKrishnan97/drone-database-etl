@@ -26,11 +26,16 @@ def download_from_uris(listofuris):
 
 def uri_to_url(uri_lists):
 
+    urls = []
+
     for uri in uri_lists:
         split_uri = uri.split('/')
         objectname = '/'.join(split_uri[-4:])
         bucketname = split_uri[2]
         url = f'https://{bucketname}.s3.us-east-2.amazonaws.com/{objectname}'
+        urls.append(url)
+
+    return urls
 
 
 
