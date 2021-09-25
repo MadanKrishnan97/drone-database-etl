@@ -7,7 +7,7 @@
 # TODO 3. Add try/except statements
 
 from PIL import Image, JpegImagePlugin
-from PIL.ExifTags import TAGS
+from PIL.ExifTags import TAGS, GPSTAGS
 import os
 import json
 
@@ -20,6 +20,7 @@ def extract_metadata(path_to_img: str) -> dict:
     Output: dictionary with metadata
     """
     img_metadata = {}
+    gpsinfo = {}
     image = Image.open(path_to_img)
     exif_data = image.getexif()
 
@@ -48,7 +49,37 @@ def extract_metadata(path_to_img: str) -> dict:
         if isinstance(img_metadata[t], str):
             img_metadata[t] = img_metadata[t].replace('\x00', '')
 
+
     return img_metadata
+
+### Ruizs Addition
+
+# Extract more metadata parameters (might only need a few of the ones that's extracted) 
+def extract_more(filepath):
+  with open(filepath, 'rb') as image_file:
+    image_file = Image(image_file)
+
+  all_values = image_file.get_all()
+  return all_values
+
+# Returns more metadata on geolocation in dict format
+
+def extract_geolocation(file_path):
+  gpsinfo = {}
+  image = Image.open(file_path)
+  info = image.getexif()
+  for key_tag, value in info.items():
+      decoded = TAGS.get(key_tag, key_tag)
+      gpsinfo[decoded] = value
+
+  geolocation = {}
+  for key in gpsinfo['GPSInfo'].keys():
+    decode = GPSTAGS.get(key, key)
+    geolocation[decode] = gpsinfo['GPSInfo'][key]
+
+  return geolocation
+
+### End of Ruizs Addition
 
 
 def clean_metadata(metadata_dictionary):
@@ -99,8 +130,10 @@ def metadata_dict_to_json(clean_metadata_dict):
 
 if __name__ == "__main__":
 
-    example_img = 'C:/Users/G-Unit/Desktop/Arisa/VDJ2021/' \
-                  'drone-database-etl-copy/data/Part1/Images/100_0006_0001 (2).JPG'
+    example_img = 'C:/Users/owner/Documents/Data Science/Datasets/100_0006_0001 (2).JPG'
+
+    # example_img = 'C:/Users/G-Unit/Desktop/Arisa/VDJ2021/' \
+    #               'drone-database-etl-copy/data/Part1/Images/100_0006_0001 (2).JPG'
 
     print(os.path.getsize(example_img))
     metadata_dict = extract_metadata(example_img)
@@ -112,4 +145,12 @@ if __name__ == "__main__":
 
     print(metadata_dict_to_json(clean_metadata(metadata_dict)))
 
-tst = "test"
+# Ruiz's additional functions
+    print('======')
+
+    # # more_geo = extract_geolocation(example_img)
+    # print(more_geo)
+
+    # print('======')
+    more_data = extract_more(example_img)
+
