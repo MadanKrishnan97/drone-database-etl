@@ -1,24 +1,27 @@
-# Vancouver Datajam 2021 Project template 
+# Vancouver Datajam 2021
+### Health in our communities: recovering from the COVID19 pandemic
+### Project dimension:
+Social recovery: research and education
 
-This repository contains a Python project template for the drone database project. Another line added.
+## Project - Drone Image Database Project
 
-## Project title
+### Acknowledgement
+Project brought forward by partner organization:
+British Columbia Institute of Technology, Remotely Piloted Aircraft Systems team members Dr. Eric Saczuck and Sean 
+Galaway
 
-## Project statement
+### Description 
+The goal of this project is to develop a data ETL pipeline using Python on AWS to organize images taken by a drone. 
+Participants will receive a set of images, and tag information, and the goal is to develop a database that allows
+others to query images by date, tag and location.
 
 ## Project team members
 
-Team lead:
+Team lead: Madana Krishnan V K
 
-Mentor:
+Mentors: Luciano Andrade, Todd Brett
 
-Documentation:
-
-Scripting:
-
-Modelling: 
-
-Sanity checking: 
+Team Members: Xinyue Chen, Annika Wevers, Enwongo Ekanem, Ruiz Rivera, Arisa Yoshikawa
 
 ## Vancouver Datajam 2021 Schedule:
 
