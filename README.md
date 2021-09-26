@@ -14,7 +14,7 @@ Mentor:
 
 Documentation:
 
-Scripting:
+Scripting: Xinyue Chen
 
 Modelling: 
 
